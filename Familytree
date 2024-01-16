@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Family Tree</title>
+</head>
+<body>
+    <div id="family-tree">
+        <!-- Family tree structure goes here -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+#family-tree {
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Add more styles as needed */
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Sample family tree data (replace with your actual data)
+    const familyTreeData = {
+        id: 1,
+        name: 'First Owner',
+        children: [
+            {
+                id: 2,
+                name: 'Second Generation',
+                children: [
+                    {
+                        id: 3,
+                        name: 'Third Generation'
+                    },
+                    {
+                        id: 4,
+                        name: 'Third Generation'
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: 'Second Generation',
+                children: [
+                    {
+                        id: 6,
+                        name: 'Third Generation'
+                    }
+                ]
+            }
+        ]
+    };
+
+    // Display family tree
+    function displayFamilyTree(node, parentElement) {
+        const nodeElement = document.createElement('div');
+        nodeElement.className = 'family-node';
+        nodeElement.innerHTML = `<p>${node.name}</p>`;
+        parentElement.appendChild(nodeElement);
+
+        if (node.children && node.children.length > 0) {
+            const childrenContainer = document.createElement('div');
+            childrenContainer.className = 'children-container';
+            nodeElement.appendChild(childrenContainer);
+
+            node.children.forEach(child => {
+                displayFamilyTree(child, childrenContainer);
+            });
+        }
+    }
+
+    // Initial display
+    const familyTreeContainer = document.getElementById('family-tree');
+    displayFamilyTree(familyTreeData, familyTreeContainer);
+});
